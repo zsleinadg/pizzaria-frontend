@@ -11,10 +11,12 @@ import { useRouter } from "next/navigation"
 
 export function CategoryForm() {
     const [open, setOpen] = useState(false)
+    const [error, setError] = useState("")
     const router = useRouter()
 
     async function handleCreateCategory(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
+        setError("")
 
         const formData = new FormData(e.currentTarget)
         const result = await createCategoryAction(formData)
@@ -24,6 +26,8 @@ export function CategoryForm() {
             router.refresh()
             return
         }
+
+        setError(result.error || "Failed to create category")
     }
 
     return (
@@ -59,6 +63,10 @@ export function CategoryForm() {
                             className="border-app-border bg-app-background text-white"
                         />
                     </div>
+
+                    {error && (
+                        <p className="text-red-400 text-sm text-center">{error}</p>
+                    )}
 
                     <Button type="submit" className="w-full bg-brand-primary  text-white hover:bg-brand-primary/80">
                         Create Category

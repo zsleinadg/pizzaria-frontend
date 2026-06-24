@@ -7,9 +7,15 @@ import { Tags } from "lucide-react"
 
 export default async function Categories() {
     const token = await getAuthToken()
-    const categories = await apiClient<Category[]>("/category", {
-        token: token!
-    })
+
+    let categories: Category[] = []
+    try {
+        categories = await apiClient<Category[]>("/category", {
+            token: token!
+        })
+    } catch (error) {
+        console.error("Failed to load categories:", error)
+    }
 
     return (
         <div className=" space-y-4 sm:space-y-6">

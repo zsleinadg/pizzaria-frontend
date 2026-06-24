@@ -11,18 +11,19 @@ import Image from "next/image";
 export default async function Products() {
     const token = await getAuthToken()
 
-    //     const categories = await apiClient<Category[]>("/category", {
-    //         token: token!
-    //     })
+    let categories: Category[] = []
+    let products: Product[] = []
 
-    //     const products = await apiClient<Product[]>("/products", {
-    // token: token
-    //     })
-
-    const [categories, products] = await Promise.all([
-        apiClient<Category[]>("/category", { token: token! }),
-        apiClient<Product[]>("/products", { token: token! })
-    ])
+    try {
+        const result = await Promise.all([
+            apiClient<Category[]>("/category", { token: token! }),
+            apiClient<Product[]>("/products", { token: token! })
+        ])
+        categories = result[0]
+        products = result[1]
+    } catch (error) {
+        console.error("Failed to load products or categories:", error)
+    }
 
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat("pt-BR", {

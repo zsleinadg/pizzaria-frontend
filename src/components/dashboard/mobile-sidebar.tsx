@@ -71,7 +71,7 @@ export function MobileSidebar() {
                     </Sheet>
 
                     <h1 className="text-lg font-bold">
-                        Teste<span className="text-brand-primary">Pizzaria</span>
+                        Pizza<span className="text-brand-primary">Flow</span>
                     </h1>
                     <div>
 

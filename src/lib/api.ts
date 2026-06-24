@@ -1,5 +1,9 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL as string || process.env.API_URL as string
 
+if (!API_URL) {
+    console.warn("⚠️ API_URL is not defined. Check your environment variables.");
+}
+
 export function getApiUrl() {
     return API_URL
 }

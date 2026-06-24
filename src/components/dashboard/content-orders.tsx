@@ -7,7 +7,7 @@ import { EyeIcon, RefreshCcw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
-import { formartPrice } from "@/lib/format";
+import { formatPrice } from "@/lib/format";
 import { OrderModal } from "./order-modal";
 
 interface OrderProps {
@@ -117,7 +117,7 @@ export function ContentOrders({ token }: OrderProps) {
                                 <div className="flex flex-col xl:flex-row items-center justify-between pt-4 border-t border-app-border gap-3">
                                     <div className=" self-start">
                                         <p className="text-sm text-gray-400 md:text-base">Total</p>
-                                        <p className="text-base font-bold text-brand-primary">{formartPrice(calculateOrderTotal(order))}</p>
+                                        <p className="text-base font-bold text-brand-primary">{formatPrice(calculateOrderTotal(order))}</p>
                                     </div>
                                     <Button
                                     onClick={() => setSelectedOrder(order.id)}

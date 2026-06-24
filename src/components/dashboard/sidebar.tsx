@@ -20,7 +20,7 @@ export function Sidebar({ userName }: { userName: string }) {
         <aside className="hidden lg:flex flex-col h-screen w-64 border-r border-app-border bg-app-sidebar">
             <div className="border-b border-app-border p-6">
                 <h2 className="text-xl font-bold text-white">
-                    Teste<span className="text-brand-primary">Pizzaria</span>
+                    Pizza<span className="text-brand-primary">Flow</span>
                 </h2>
                 <p className="text-sm text-gray-300 mt-1">Hello, {userName}!</p>
             </div>

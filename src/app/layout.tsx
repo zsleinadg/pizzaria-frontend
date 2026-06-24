@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TestePizzaria - The best pizza",
-  description: "The best pizzarie of your city!",
+  title: "PizzaFlow - Order Management",
+  description: "Complete order management system for your pizzeria!",
 };
 
 export default function RootLayout({
