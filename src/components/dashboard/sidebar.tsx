@@ -1,6 +1,6 @@
 "use client"
 
-import { ShoppingCart, Package, Tags, LogOut } from "lucide-react"
+import { ShoppingCart, Package, Tags, PlusCircle, LogOut } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -9,6 +9,7 @@ import { logoutAction } from "@/actions/auth"
 
 export const menuItems = [
     { title: 'Dashboard', href: '/dashboard', icon: ShoppingCart },
+    { title: 'New Order', href: '/dashboard/orders/new', icon: PlusCircle },
     { title: 'Products', href: '/dashboard/products', icon: Package },
     { title: 'Categories', href: '/dashboard/categories', icon: Tags },
 ]
