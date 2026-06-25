@@ -1,12 +1,8 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL as string || process.env.API_URL as string
+const isServer = typeof window === "undefined"
 
-if (!API_URL) {
-    console.warn("⚠️ API_URL is not defined. Check your environment variables.");
-}
-
-export function getApiUrl() {
-    return API_URL
-}
+const API_URL = process.env.NODE_ENV === "development" && !isServer
+    ? "/api"
+    : process.env.NEXT_PUBLIC_API_URL as string
 
 interface FetchOptions extends RequestInit {
     token?: string;

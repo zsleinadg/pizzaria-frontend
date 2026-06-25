@@ -1,25 +1,28 @@
 "use client"
 
-import { Button } from "@/components/ui/button";
-import { apiClient } from "@/lib/api";
-import { Order } from "@/lib/types";
-import { EyeIcon, RefreshCcw } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { formatPrice } from "@/lib/format";
-import { OrderModal } from "./order-modal";
+import { Button } from "@/components/ui/button"
+import { apiClient } from "@/lib/api"
+import { Order } from "@/lib/types"
+import { EyeIcon, RefreshCcw } from "lucide-react"
+import { useEffect, useState, useCallback } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card"
+import { Badge } from "../ui/badge"
+import { formatPrice } from "@/lib/format"
+import { OrderModal } from "./order-modal"
+import { useRouter } from "next/navigation"
 
 interface OrderProps {
     token: string
+    initialOrders: Order[]
 }
 
-export function ContentOrders({ token }: OrderProps) {
-    const [loading, setLoading] = useState(true)
-    const [orders, setOrders] = useState<Order[]>([])
+export function ContentOrders({ token, initialOrders }: OrderProps) {
+    const router = useRouter()
+    const [orders, setOrders] = useState<Order[]>(initialOrders)
+    const [loading, setLoading] = useState(false)
     const [selectedOrder, setSelectedOrder] = useState<null | string>(null)
 
-    const fetchOrders = async () => {
+    const fetchOrders = useCallback(async () => {
         try {
             const response = await apiClient<Order[]>("/orders?draft=false", {
                 method: "GET",
@@ -35,14 +38,13 @@ export function ContentOrders({ token }: OrderProps) {
         catch (error) {
             setLoading(false)
         }
-    }
+    }, [token])
 
     useEffect(() => {
-        async function loadOrders() {
-            await fetchOrders()
-        }
-        loadOrders()
-    }, [])
+        fetchOrders()
+        const interval = setInterval(fetchOrders, 30000)
+        return () => clearInterval(interval)
+    }, [fetchOrders])
 
     const calculateOrderTotal = (order: Order) => {
         if (!order.items) return 0
