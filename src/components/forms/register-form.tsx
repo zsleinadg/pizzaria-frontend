@@ -23,7 +23,7 @@ export function RegisterForm() {
         <Card className="bg-app-card border-app-border w-full max-w-md mx-auto">
             <CardHeader>
                 <CardTitle className="text-white text-center text-3xl sm:text-4xl font-bold">
-                    Register<span className="text-brand-primary">Pizza</span>
+                    Pizza<span className="text-brand-primary">Flow</span>
                 </CardTitle>
                 <CardDescription className="text-white text-center mt-2">Create your account to get started</CardDescription>
             </CardHeader>
